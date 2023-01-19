@@ -17,7 +17,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.util import Throttle
 from homeassistant.util.dt import get_time_zone, utcnow
 
-from .const import ATTRIBUTION, CONF_REAL_TIME, CONF_STATION, DOMAIN, MANUFACTURER
+from .const import ATTRIBUTION, CONF_REAL_TIME, CONF_ALL_STATIONS_IN_NODE, CONF_STATION, DOMAIN, MANUFACTURER
 
 MIN_TIME_BETWEEN_UPDATES = timedelta(minutes=1)
 MAX_LIST = 20
@@ -92,6 +92,7 @@ class HVVDepartureSensor(SensorEntity):
             },
             "maxList": MAX_LIST,
             "maxTimeOffset": MAX_TIME_OFFSET,
+            "allStationsInChangingNode": self.config_entry.options.get(CONF_ALL_STATIONS_IN_NODE, True),
             "useRealtime": self.config_entry.options.get(CONF_REAL_TIME, False),
         }
 
